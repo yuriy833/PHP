@@ -1,22 +1,32 @@
 <?php
 //Ввод данных
-    $name = readline ("Как Вас зовут? ");
-    $question1 = readline ("Какая задача стоит перед вами сегодня? ");
-    $time1 = readline ("Сколько примерно времени эта задача займет? ");
-    $question2 = readline ("Какая 2-я задача стоит перед вами сегодня? ");
-    $time2 = readline ("Сколько примерно времени эта задача займет? ");
-    $question3 = readline ("Какая 3-я задача стоит перед вами сегодня? ");
-    $time3 = readline ("Сколько примерно времени эта задача займет? ");
+$name = readline("Как Вас зовут: ");
+
+$count = 1;
+$sumTime = 0;
+
+do {
+    $amount = (int)readline("Сколько задач заланировано на сегодня? ");
+} while ($amount <= 0);
 
 //Основная логика
-    $sumTime = $time1 + $time2 + $time3;
-    $result = <<<HERE
-    {$name}, сегодня у вас запланировано 3 приоритетных задачи на день: 
-    - {$question1} ({$time1}ч)
-    - {$question2} ({$time2}ч)
-    - {$question3} ({$time3}ч)
-    Примерное время выполнения плана = {$sumTime}ч
-    HERE;
+$result = "{$name}, сегодня у вас запланировано {$amount} приоритетных задачи на день: \n";
+
+for($i = 0; $i < $amount; $i++) {
+    $task = "task{$count}";
+    $time = "time{$count}";
+
+    $$task = readline("Какая задача стоит перед вами сегодня? ");
+    $$time = (int)readline("Сколько примерно времени эта задача займет? ");
+
+    $sumTime += $$time;
+
+    $result .= "- {$$task} ({$$time}ч)\n";
+
+    $count++;
+}
+
+$result .= "Примерное время выполнения плана = {$sumTime}ч";
 
 //Вывод данных
-    echo $result;
+echo $result;

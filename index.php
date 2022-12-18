@@ -1,10 +1,25 @@
 <?php
+
+echo "В каком году произошло крещение Руси? Варианты: 810, 990 или 740 год.";
+$result = "";
+
 //Ввод данных
-    $name = readline ("Как Вас зовут? ");
-    $age = readline ("Сколько Вам лет? ");
+$answer = (int)readline("");
 
 //Основная логика
-    $result = "Вас зовут {$name}, Вам {$age} лет";
+while ($answer != 990 && $answer != 810 && $answer != 740 ) {
+    $answer = (int)readline("Вы выбрали вариант, отсутствующий в вопросе, повторите ввод: ");
+}
+
+switch ($answer) {
+    case 990:
+        $result = "Поздравляю, это правильный ответ!";
+        break;
+    case 810:
+    case 740:
+        $result = "Ответ неверный!";
+        break;
+}
 
 //Вывод данных
-    echo $result;
+echo $result;
