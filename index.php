@@ -1,25 +1,13 @@
 <?php
 
-echo "В каком году произошло крещение Руси? Варианты: 810, 990 или 740 год.";
-$result = "";
-
-//Ввод данных
-$answer = (int)readline("");
+$arr1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+$arr2 = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
+$result = [];
 
 //Основная логика
-while ($answer != 990 && $answer != 810 && $answer != 740 ) {
-    $answer = (int)readline("Вы выбрали вариант, отсутствующий в вопросе, повторите ввод: ");
-}
-
-switch ($answer) {
-    case 990:
-        $result = "Поздравляю, это правильный ответ!";
-        break;
-    case 810:
-    case 740:
-        $result = "Ответ неверный!";
-        break;
+for($i = 0; $i < count($arr1); $i++) {
+    $result[] = $arr1[$i] * $arr2[$i];
 }
 
 //Вывод данных
-echo $result;
+print_r($result);
