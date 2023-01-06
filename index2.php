@@ -1,22 +1,39 @@
 <?php
-
-$wish = ["счастья", "здоровья", "удачи", "благосостояния", "совершенства"];
-$epithet = ["бесконечного", "крепкого", "дивного", "желанного"];
-$result = [];
-$end = "";
-
 //Ввод данных
-$name = readline("Как вас зовут? ");
+$randomArr = [];
+
+while(!$counterUser = (int)readline("Выберите количество чисел массива от 1 до 50? ") ) {
+    echo "Введите число!\n";
+}
+
+for($i = 0; $i < $counterUser; $i++) {
+    $randomArr [] = rand(0,50);
+}
 
 //Основная логика
-for ($i = 0; $i < 3; $i++) {
-    if($i < 2) {
-    $result[] = $epithet[array_rand($epithet, 1)] . " " . $wish[array_rand($wish, 1)];
-    } else {
-        $end .= $epithet[array_rand($epithet, 1)] . " " . $wish[array_rand($wish, 1)];
-    }
+function sumArr ( array $arr):int
+{
+    $result = 0;
+    foreach ($arr as $item) $result += $item;
+    return $result;
 }
-$str = implode(", ", $result);
+
+function avg (array $arr):int 
+{
+    return sumArr($arr) / count($arr);
+}
+
+function userFn (array $arr):array
+{
+    $result = [];
+    $result["max"] = max($arr);
+    $result["min"] = min($arr);
+    $result["avg"] = avg($arr);
+    return $result;
+}
 
 //Вывод данных
-echo "Дорогой {$name}, от всего сердца поздравляю тебя с днем рождения, желаю {$str} и {$end}!";
+echo "Результат работы:";
+print_r(userFn($randomArr));
+echo "Массив чисел:";
+print_r($randomArr);
