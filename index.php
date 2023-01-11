@@ -1,12 +1,19 @@
 <?php
-//Ввод данных
-$arr = [4, 5, 1, 4, 7, 8, 15, 6, 71, 45, 2];
 
-//Основная логика
-$result = array_map(fn(int $item):string => $item & 1 ? 'Нечетное' : 'Четное', $arr);
+include 'Comment.php';
+include 'User.php';
+include 'Task.php';
+include 'TaskService.php';
 
-//Вывод данных
-echo 'Массив чисел:';
-print_r($arr);
-echo 'Массив результата:';
-print_r($result);
+$user = new User('Юзер1', 'user@user.ru');
+$task = new Task($user, 'Задача номер 1', 6);
+
+TaskService::addComment($user, $task, 'Сделать поскорее');
+TaskService::addComment($user, $task, 'Второй коммент');
+
+echo 'Комментарии ' . PHP_EOL;
+
+foreach ($task->getComments() as $comments) {
+    echo $comments->getText() . ', ';
+    echo 'имя задачи ' . $comments->getTask()->getDescription() . PHP_EOL;
+}
